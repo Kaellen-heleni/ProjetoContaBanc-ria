@@ -3,7 +3,7 @@ package conta.repository;
 import conta.model.Conta;
 
 public interface ContaRepository {
-//CRUD da Conta
+    //CRUD da Conta
 	public void procurarPorNumero(int numero);
 	public void listarTodas();
 	public void cadastrar(Conta conta);

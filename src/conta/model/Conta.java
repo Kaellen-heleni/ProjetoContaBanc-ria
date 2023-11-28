@@ -1,5 +1,7 @@
 package conta.model;
 
+import conta.util.Cores;
+
 public abstract class Conta {
 	private int numero;
 	private int agencia;
@@ -80,7 +82,7 @@ public void visualizar() {
 		tipo = "Conta Poupança";
 		break;
 	}
-	System.out.println("\n\n***********************************************************");
+	System.out.println(Cores.TEXT_PURPLE_BOLD + Cores.ANSI_BLACK_BACKGROUND+"\n\n***********************************************************");
 	System.out.println("Dados da Conta:");
 	System.out.println("***********************************************************");
 	System.out.println("Numero da Conta: " + this.numero);
@@ -88,6 +90,9 @@ public void visualizar() {
 	System.out.println("Tipo da Conta: " + tipo);
 	System.out.println("Titular: " + this.titular);
 	System.out.println("Saldo: " + this.saldo);
+	System.out.println("                                                                                    "
+			+ Cores.TEXT_RESET);
+
 	
 }
 

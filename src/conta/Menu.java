@@ -15,11 +15,12 @@ public class Menu {
 		ContaController contas = new ContaController();
 		
 		Scanner receba = new Scanner(System.in);
-	     int opcao, numero, agencia, tipo, aniversario;
+	     int opcao, numero, agencia, tipo, aniversario, numeroDestino;
 	     String titular;
-	     float saldo, limite;
+	     float saldo, limite, valor
+	     ;
 	     
-	     System.out.println("\nCriar Contas\n");
+	     System.out.println(Cores.TEXT_PURPLE_BOLD + Cores.ANSI_BLACK_BACKGROUND+"\nCriar Contas\n");
 	     ContaCorrente cc1 = new ContaCorrente(contas.gerarNumero(), 123, 1, "Maite Peroni", 10000f, 1000.0f);
 	     contas.cadastrar(cc1);
 	     ContaCorrente cc2 = new ContaCorrente(contas.gerarNumero(), 124, 1, "Dulce Maria", 40000f, 2000.0f);
@@ -29,29 +30,29 @@ public class Menu {
 	     ContaPoupanca cp2 = new ContaPoupanca(contas.gerarNumero(), 126, 2, "Christopher Ucker", 1000f, 05);
 		contas.cadastrar(cp2);
 		contas.listarTodas();
-		
+		System.out.println("                                                                                    "
+				+ Cores.TEXT_RESET);
+
 	     while (true) {
-			System.out.println(Cores.TEXT_BLACK_BOLD + Cores.ANSI_WHITE_BACKGROUND
-					+ "•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••");
-			System.out.println("                                                                                    ");
-			System.out.println("                         BANCO FUTURAMA                      ");
-			System.out.println("                                                                                    ");
-			System.out.println("•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••");
-			System.out.println("                                                                                    ");
-			System.out.println("                       1 - Abrir uma Conta                         ");
-			System.out.println("                      2 - Listar todas as Contas                ");
-			System.out.println("                      3 - Buscar Conta por Número        ");
-			System.out.println("                      4 - Atualizar os Dados da Conta   ");
-			System.out.println("                      5 - Encerrar Conta                           ");
-			System.out.println("                      6 - Realizar Saque                             ");
-			System.out.println("                      7 - Realizar Depósito                       ");
-			System.out.println("                      8 - Transferência entre Contas     ");
-			System.out.println("                      9 - Sair                                                ");
-			System.out.println("                                                                                    ");
-			System.out.println("•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••");
-			System.out.println(" Entre com a opção desejada:                                ");
-			System.out.println("                                                                                    "
-					+ Cores.TEXT_RESET);
+	    	 System.out.println(Cores.TEXT_PURPLE_BOLD + Cores.ANSI_BLACK_BACKGROUND+ "*****************************************************");
+				System.out.println("                                                                                                          ");
+				System.out.println("               BANCO DO FUTURO                                                ");
+				System.out.println("                                                                                                          ");
+				System.out.println("*****************************************************");
+				System.out.println("                                                                                                          ");
+				System.out.println("            1 - Criar Conta                                                                 ");
+				System.out.println("            2 - Listar todas as Contas                                             ");
+				System.out.println("            3 - Buscar Conta por Numero                                      ");
+				System.out.println("            4 - Atualizar Dados da Conta                                        ");
+				System.out.println("            5 - Apagar Conta                                                              ");
+				System.out.println("            6 - Sacar                                                                             ");
+				System.out.println("            7 - Depositar                                                                     ");
+				System.out.println("            8 - Transferir                                                                     ");
+				System.out.println("            9 - Sair                                                                                ");
+				System.out.println("                                                                                                          ");
+				System.out.println("*****************************************************");
+				System.out.println("Entre com a opção desejada:                                                      ");
+				System.out.println("                                                                                                         " + Cores.TEXT_RESET);
 
 			try {
 			opcao = receba.nextInt();
@@ -62,7 +63,7 @@ public class Menu {
 			}
 
 			if (opcao == 9) {
-				System.out.println(Cores.TEXT_WHITE_BOLD + "\nBanco PU - Seu próximo passo para um futuro melhor! ");
+				System.out.println(Cores.TEXT_PURPLE_BOLD + Cores.ANSI_BLACK_BACKGROUND+ "\nBanco PU - Seu próximo passo para um futuro melhor! ");
 				sobre();
 				receba.close();
 				System.exit(0);
@@ -70,10 +71,10 @@ public class Menu {
 			}
 			switch (opcao) {
 			case 1:
-				System.out.println(Cores.TEXT_BLUE_BOLD_BRIGHT + "Abrir uma Conta\n\n");
-				System.out.println("Digite o Numero da Agência: ");
+				System.out.println(Cores.TEXT_PURPLE_BOLD + Cores.ANSI_BLACK_BACKGROUND+"Abrir uma Conta\n\n");
+				System.out.println(Cores.TEXT_PURPLE_BOLD + Cores.ANSI_BLACK_BACKGROUND+"Digite o Numero da Agência: ");
 				agencia = receba.nextInt();
-				System.out.println("Digite o Nome do Titular da conta: ");
+				System.out.println(Cores.TEXT_PURPLE_BOLD + Cores.ANSI_BLACK_BACKGROUND+"Digite o Nome do Titular da conta: ");
 				receba.skip("\\R?");
 				titular = receba.nextLine();
 				do {
@@ -141,6 +142,8 @@ public class Menu {
 				}
 				keyPress();
 				break;
+				
+				
 			case 5:
 				System.out.println(Cores.TEXT_BLUE_BOLD_BRIGHT + "Deletar uma Conta\n\n");
 				System.out.println("Digite o número da conta: ");
@@ -150,14 +153,38 @@ public class Menu {
 				break;
 			case 6:
 				System.out.println(Cores.TEXT_BLUE_BOLD_BRIGHT + "Realizar um Saque\n\n");
+				System.out.println("Informe o Numero da Conta: ");
+				numero = receba.nextInt();
+				do {
+					System.out.println("Informe o Valor que deseja Sacar: R$ ");
+					valor = receba.nextFloat();
+				}while(valor <= 0);
+				contas.sacar(numero, valor);
+				
 				keyPress();
 				break;
 			case 7:
 				System.out.println(Cores.TEXT_BLUE_BOLD_BRIGHT + "Realizar um Depósito na Conta\n\n");
+				System.out.println("Informe o Numero da Conta: ");
+				numero = receba.nextInt();
+				do {
+					System.out.println("Informe o Valor do Depósito: R$ ");
+				valor = receba.nextFloat();
+				}while(valor <= 0);
+				contas.depositar(numero, valor);
 				keyPress();
 				break;
 			case 8:
 				System.out.println(Cores.TEXT_BLUE_BOLD_BRIGHT + "Realizar Transferência entre Contas\n\n");
+				System.out.println("Informe o Numero da Conta de Origem:  ");
+				numero = receba.nextInt();
+				System.out.println("Informe o Numero da Conta de Destino: ");
+				numeroDestino = receba.nextInt();
+				do {
+					System.out.println("Informe o valor da Transferência: R$ ");
+					valor = receba.nextFloat();
+				}while(valor<=0);
+				contas.transferir(numero, numeroDestino, valor);
 				keyPress();
 				break;
 			default:
